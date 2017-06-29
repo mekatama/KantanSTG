@@ -1,0 +1,2 @@
+# KantanSTG
+EasySTG
