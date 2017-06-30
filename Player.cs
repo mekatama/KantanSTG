@@ -8,6 +8,8 @@ public class Player : MonoBehaviour {
 	GameObject tapArea;								//検索したオブジェクト入れる用
 	private bool shotFlag = false;					//ショット一回だけ発射処理用フラグ
 	public Transform bulletStartPosition = null;	//弾の発射位置を取得するボーン
+	public int rapidMax;							//連射数の最大値
+	public int rapidNum = 0;						//連射数カウント用
 
 	void Start () {
 		playey = GameObject.FindWithTag ("Player");		//Playerタグのオブジェクトを探す
@@ -22,14 +24,17 @@ public class Player : MonoBehaviour {
 
 		//rbって仮の変数にRigidbody2Dコンポーネントを入れる
 		Tap t = tapArea.GetComponent<Tap>();
-		//自機の弾発射ふらぐと、Tapのフラグを見て弾を発射する
+		//自機の弾発射フラグと、Tapのフラグを見て弾を発射する
 		if(shotFlag == false){
 			if(t.gamenTap){
-				Debug.Log("shot");
-				//弾を生成する位置を指定する
-				Vector2 vecBulletPos = bulletStartPosition.position;
-				Instantiate(bulletObject, vecBulletPos, transform.rotation);			//プレハフ生成
-				shotFlag = true;
+				if(rapidMax > rapidNum){
+					Debug.Log("shot");
+					//弾を生成する位置を指定する
+					Vector2 vecBulletPos = bulletStartPosition.position;
+					Instantiate(bulletObject, vecBulletPos, transform.rotation);			//プレハフ生成
+					shotFlag = true;
+					rapidNum += 1;
+				}
 			}
 		}
 		//タップ離すと初期化する
