@@ -12,12 +12,21 @@ public class Bullet : MonoBehaviour {
 
 	//他のオブジェクトとの当たり判定
 	void OnTriggerEnter2D(Collider2D other) {
+
 		if(other.tag == "Wall"){
 			//pって仮の変数にPlayerコンポーネントを入れる
 			Player p = playey.GetComponent<Player>();
 			p.rapidNum -= 1;
 			//このGameObjectを［Hierrchy］ビューから削除する
 			Destroy( gameObject);
+		}
+
+		if(other.tag == "Enemy"){
+			//pって仮の変数にPlayerコンポーネントを入れる
+			Player p = playey.GetComponent<Player>();
+			p.rapidNum -= 1;
+			//このGameObjectを［Hierrchy］ビューから削除する
+			Destroy(gameObject);
 		}
 	}
 }
