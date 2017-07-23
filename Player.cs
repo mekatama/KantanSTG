@@ -45,11 +45,17 @@ public class Player : MonoBehaviour {
 
 	//接触判定
 	void OnCollisionEnter2D(Collision2D col){
+		//左右の壁との接触時
 		if(col.gameObject.tag == "Wall"){
 			//tempって仮の変数にlocalScaleコンポーネントを入れる
 			Vector2 temp = gameObject.transform.localScale;
 			temp.x *= -1;							//左右反転させる
 			gameObject.transform.localScale = temp;	//元に戻す
+		}
+
+		//フェンスとの接触時
+		if(col.gameObject.tag == "MissLine"){
+			Destroy(gameObject);
 		}
 	}
 }
