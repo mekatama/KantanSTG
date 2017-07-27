@@ -19,7 +19,7 @@ public class BulletBom : MonoBehaviour {
 		}
 
 		if(other.tag == "Enemy"){
-			Destroy(gameObject);	//このGameObjectを［Hierrchy］ビューから削除する
+//			Destroy(gameObject);	//このGameObjectを［Hierrchy］ビューから削除する
 		}
 	}
 }
