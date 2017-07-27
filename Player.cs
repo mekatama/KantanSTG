@@ -11,16 +11,17 @@ public class Player : MonoBehaviour {
 	public int rapidMax;							//連射数の最大値
 	public int rapidNum = 0;						//連射数カウント用
 
+	public GameObject bomObject = null;				//BOMプレハブ
 
 //	public bool playerTap = false;					//
 
-//	GameObject gameController;						//検索したオブジェクト入れる用
-//	private bool bomFlag = true;					//BOM一回だけ発射処理用フラグ
+	GameObject gameController;						//検索したオブジェクト入れる用
+	private bool bomFlag = false;					//BOM一回だけ発射処理用フラグ
 
 	void Start () {
 		playey = GameObject.FindWithTag ("Player");		//Playerタグのオブジェクトを探す
 		tapArea = GameObject.FindWithTag ("TapArea");	//TapAreaタグのオブジェクトを探す
-//		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
+		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 	}
 	
 	void Update () {
@@ -47,21 +48,19 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-/*	
 		//gcって仮の変数にGameControllerコンポーネントを入れる
-//		GameController gc = gameController.GetComponent<GameController>();
+		GameController gc = gameController.GetComponent<GameController>();
 		if(bomFlag == false){
-//			if(gc.bomTap){
+			if(gc.bomTap){
 				Debug.Log("bom shoot !!");
 				//弾を生成する位置を指定する
 				Vector2 vecBulletPos = bulletStartPosition.position;
-				Instantiate(bulletObject, vecBulletPos, transform.rotation);	//プレハフ生成
+				Instantiate(bomObject, vecBulletPos, transform.rotation);	//プレハフ生成
 				bomFlag = true;
 				//↑これは画面外でボムか消えたらfalseに持っていく
 				//残りボム数を見て発射できるかどうか分岐する
-//			}
+			}
 		}	
-*/
 		//タップ離すと初期化する
 		if(t.gamenTap == false){
 			shotFlag = false;
