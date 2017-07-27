@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour {
 
 	//他のオブジェクトとの当たり判定
 	void OnTriggerEnter2D(Collider2D other) {
+		//通常弾との判定
 		if(other.tag == "Bullet"){
 //			Debug.Log("hit!!");
 			if(enemyHp > 0){
@@ -30,6 +31,17 @@ public class Enemy : MonoBehaviour {
 					Instantiate (item, transform.position, transform.rotation);
 				}
 			}
+		}
+
+		//Bomとの判定
+		if(other.tag == "Bom"){
+			//gcって仮の変数にGameControllerのコンポーネントを入れる
+			GameController gc = gameController.GetComponent<GameController>();
+			//スコア加算
+			//【ネタ】ボムの時はスコアがアップする?でも、アイテムは出ない
+			gc.totalScore = gc.totalScore + enemyScore;
+			//このGameObjectを［Hierrchy］ビューから削除する
+			Destroy(gameObject);
 		}
 	}
 }
