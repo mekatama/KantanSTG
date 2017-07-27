@@ -9,12 +9,12 @@ public class Tap : MonoBehaviour {
 		//タップした判定
 		if(Input.GetMouseButtonDown(0)){
 			gamenTap = true;
-			Debug.Log("tap:" + gamenTap);
+//			Debug.Log("tap:" + gamenTap);
 		}
 		//離した判定
 		if(Input.GetMouseButtonUp(0)){
 			gamenTap = false;
-			Debug.Log("tap:" + gamenTap);
+//			Debug.Log("tap:" + gamenTap);
 		}
 	}
 }
