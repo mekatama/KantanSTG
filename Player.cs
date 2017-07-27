@@ -11,20 +11,27 @@ public class Player : MonoBehaviour {
 	public int rapidMax;							//連射数の最大値
 	public int rapidNum = 0;						//連射数カウント用
 
+
+//	public bool playerTap = false;					//
+
+//	GameObject gameController;						//検索したオブジェクト入れる用
+//	private bool bomFlag = true;					//BOM一回だけ発射処理用フラグ
+
 	void Start () {
 		playey = GameObject.FindWithTag ("Player");		//Playerタグのオブジェクトを探す
 		tapArea = GameObject.FindWithTag ("TapArea");	//TapAreaタグのオブジェクトを探す
+//		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 	}
 	
-	void FixedUpdate () {
+	void Update () {
 		//rbって仮の変数にRigidbody2Dコンポーネントを入れる
 		Rigidbody2D rb = playey.GetComponent<Rigidbody2D>();
 		//移動させる(左右反転処理している)
 		rb.velocity = new Vector2(transform.localScale.x * moveSpeed, rb.velocity.y);
 
-		//rbって仮の変数にRigidbody2Dコンポーネントを入れる
+		//tって仮の変数にtapAreaコンポーネントを入れる
 		Tap t = tapArea.GetComponent<Tap>();
-		//自機の弾発射フラグと、Tapのフラグを見て弾を発射する
+		//自機の弾発射フラグと、tapAreaのフラグを見て弾を発射する
 		if(shotFlag == false){
 			if(t.gamenTap){
 				if(rapidMax > rapidNum){
@@ -33,10 +40,28 @@ public class Player : MonoBehaviour {
 					Vector2 vecBulletPos = bulletStartPosition.position;
 					Instantiate(bulletObject, vecBulletPos, transform.rotation);			//プレハフ生成
 					shotFlag = true;
+					t.gamenTap = false;
+					Debug.Log(t.gamenTap);
 					rapidNum += 1;
 				}
 			}
 		}
+
+/*	
+		//gcって仮の変数にGameControllerコンポーネントを入れる
+//		GameController gc = gameController.GetComponent<GameController>();
+		if(bomFlag == false){
+//			if(gc.bomTap){
+				Debug.Log("bom shoot !!");
+				//弾を生成する位置を指定する
+				Vector2 vecBulletPos = bulletStartPosition.position;
+				Instantiate(bulletObject, vecBulletPos, transform.rotation);	//プレハフ生成
+				bomFlag = true;
+				//↑これは画面外でボムか消えたらfalseに持っていく
+				//残りボム数を見て発射できるかどうか分岐する
+//			}
+		}	
+*/
 		//タップ離すと初期化する
 		if(t.gamenTap == false){
 			shotFlag = false;
@@ -46,12 +71,13 @@ public class Player : MonoBehaviour {
 	//接触判定
 	void OnCollisionEnter2D(Collision2D col){
 		//左右の壁との接触時
-		if(col.gameObject.tag == "Wall"){
+		if(col.gameObject.tag == "WallSide"){
 			//tempって仮の変数にlocalScaleコンポーネントを入れる
 			Vector2 temp = gameObject.transform.localScale;
 			temp.x *= -1;							//左右反転させる
 			gameObject.transform.localScale = temp;	//元に戻す
 		}
+
 
 		//フェンスとの接触時
 		if(col.gameObject.tag == "MissLine"){
