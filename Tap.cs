@@ -2,19 +2,19 @@
 using System.Collections;
 
 public class Tap : MonoBehaviour {
-	public bool gamenTap;
+	public bool gamenTap = false;	//playerて使用するタップしたかどうかのフラグ
 
 	// Update is called once per frame
 	void Update () {
 		//タップした判定
 		if(Input.GetMouseButtonDown(0)){
 			gamenTap = true;
-			Debug.Log("tap:" + gamenTap);
+//			Debug.Log("tap:" + gamenTap);
 		}
 		//離した判定
 		if(Input.GetMouseButtonUp(0)){
 			gamenTap = false;
-			Debug.Log("tap:" + gamenTap);
+//			Debug.Log("tap:" + gamenTap);
 		}
 	}
 }
