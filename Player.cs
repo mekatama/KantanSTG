@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
 //	public bool playerTap = false;					//
 
 	GameObject gameController;						//検索したオブジェクト入れる用
-	private bool bomFlag = false;					//BOM一回だけ発射処理用フラグ
+	public bool bomFlag = false;					//BOM一回だけ発射処理用フラグ
 
 	void Start () {
 		playey = GameObject.FindWithTag ("Player");		//Playerタグのオブジェクトを探す
@@ -56,8 +56,8 @@ public class Player : MonoBehaviour {
 				//弾を生成する位置を指定する
 				Vector2 vecBulletPos = bulletStartPosition.position;
 				Instantiate(bomObject, vecBulletPos, transform.rotation);	//プレハフ生成
+				//↓これは画面外でボムか消えたらBOM側でfalseにする
 				bomFlag = true;
-				//↑これは画面外でボムか消えたらfalseに持っていく
 				//残りボム数を見て発射できるかどうか分岐する
 			}
 		}	
