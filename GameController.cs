@@ -20,6 +20,11 @@ public class GameController : MonoBehaviour {
 //				Debug.Log("click=ETC");				
 			}
 		}
+				//離した判定
+		if(Input.GetMouseButtonUp(0)){
+			bomTap = false;
+//			Debug.Log("tap:" + gamenTap);
+		}
 	}
 
 	//タップしたオブジェクト取得関数(とりあえす、詳しい内容は知らない)
