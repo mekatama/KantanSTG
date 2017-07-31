@@ -79,7 +79,10 @@ public class Player : MonoBehaviour {
 			gameObject.transform.localScale = temp;	//元に戻す
 		}
 		//フェンスとの接触時
+		//gcって仮の変数にGameControllerのコンポーネントを入れる
+		GameController gc = gameController.GetComponent<GameController>();
 		if(col.gameObject.tag == "MissLine"){
+			gc.gameOver = true;		//GameOverフラグをon
 			Destroy(gameObject);
 		}
 	}
