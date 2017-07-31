@@ -3,25 +3,19 @@ using System.Collections;
 
 public class Player : MonoBehaviour {
 	GameObject playey;								//検索したオブジェクト入れる用
-	public int moveSpeed = 2;						//移動速度
-	public GameObject bulletObject = null;			//弾プレハブ
 	GameObject tapArea;								//検索したオブジェクト入れる用
-	private bool shotFlag = false;					//ショット一回だけ発射処理用フラグ
-	public Transform bulletStartPosition = null;	//弾の発射位置を取得するボーン
-	public int rapidMax;							//連射数の最大値
-	public int rapidNum = 0;						//連射数カウント用
-
+	public GameObject bulletObject = null;			//弾プレハブ
 	public GameObject bomObject = null;				//BOMプレハブ
-
-//	public bool playerTap = false;					//
-
-	GameObject gameController;						//検索したオブジェクト入れる用
+	public Transform bulletStartPosition = null;	//弾の発射位置を取得するボーン
+	public int moveSpeed = 2;						//player移動速度
+	public int rapidMax;							//player連射数の最大値
+	public int rapidNum = 0;						//player連射数カウント用
+	private bool shotFlag = false;					//ショット一回だけ発射処理用フラグ
 	public bool bomFlag = false;					//BOM一回だけ発射処理用フラグ
 
 	void Start () {
 		playey = GameObject.FindWithTag ("Player");		//Playerタグのオブジェクトを探す
 		tapArea = GameObject.FindWithTag ("TapArea");	//TapAreaタグのオブジェクトを探す
-		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 	}
 	
 	void Update () {
@@ -36,23 +30,22 @@ public class Player : MonoBehaviour {
 		if(shotFlag == false){
 			if(t.gamenTap){
 				if(rapidMax > rapidNum){
-					Debug.Log("shot");
+//					Debug.Log("shot");
 					//弾を生成する位置を指定する
 					Vector2 vecBulletPos = bulletStartPosition.position;
 					Instantiate(bulletObject, vecBulletPos, transform.rotation);			//プレハフ生成
 					shotFlag = true;
 					t.gamenTap = false;
-					Debug.Log(t.gamenTap);
+//					Debug.Log(t.gamenTap);
 					rapidNum += 1;
 				}
 			}
 		}
 
-		//gcって仮の変数にGameControllerコンポーネントを入れる
-		GameController gc = gameController.GetComponent<GameController>();
+		//tって仮の変数にtapAreaコンポーネントを入れる
 		if(bomFlag == false){
-			if(gc.bomTap){
-				Debug.Log("bom shoot !!");
+			if(t.bomTap){
+//				Debug.Log("bom shoot !!");
 				//弾を生成する位置を指定する
 				Vector2 vecBulletPos = bulletStartPosition.position;
 				Instantiate(bomObject, vecBulletPos, transform.rotation);	//プレハフ生成
@@ -65,6 +58,9 @@ public class Player : MonoBehaviour {
 		if(t.gamenTap == false){
 			shotFlag = false;
 		}
+		if(t.bomTap == false){
+			bomFlag = false;
+		}
 	}
 
 	//接触判定
@@ -76,7 +72,6 @@ public class Player : MonoBehaviour {
 			temp.x *= -1;							//左右反転させる
 			gameObject.transform.localScale = temp;	//元に戻す
 		}
-
 
 		//フェンスとの接触時
 		if(col.gameObject.tag == "MissLine"){
