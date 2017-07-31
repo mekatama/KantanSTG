@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour {
 //			Debug.Log("hit!!");
 			if(enemyHp > 0){
 				enemyHp -= 1;
-				Debug.Log("EneyHP=" + enemyHp);
+//				Debug.Log("EneyHP=" + enemyHp);
 			}
 			if(enemyHp <= 0){
 				//gcって仮の変数にGameControllerのコンポーネントを入れる
