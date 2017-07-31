@@ -4,6 +4,7 @@ using System.Collections;
 public class Player : MonoBehaviour {
 	GameObject playey;								//検索したオブジェクト入れる用
 	GameObject tapArea;								//検索したオブジェクト入れる用
+	GameObject gameController;						//検索したオブジェクト入れる用
 	public GameObject bulletObject = null;			//弾プレハブ
 	public GameObject bomObject = null;				//BOMプレハブ
 	public Transform bulletStartPosition = null;	//弾の発射位置を取得するボーン
@@ -14,8 +15,9 @@ public class Player : MonoBehaviour {
 	public bool bomFlag = false;					//BOM一回だけ発射処理用フラグ
 
 	void Start () {
-		playey = GameObject.FindWithTag ("Player");		//Playerタグのオブジェクトを探す
-		tapArea = GameObject.FindWithTag ("TapArea");	//TapAreaタグのオブジェクトを探す
+		playey = GameObject.FindWithTag ("Player");					//Playerタグのオブジェクトを探す
+		tapArea = GameObject.FindWithTag ("TapArea");				//TapAreaタグのオブジェクトを探す
+		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 	}
 	
 	void Update () {
@@ -42,18 +44,22 @@ public class Player : MonoBehaviour {
 			}
 		}
 
-		//tって仮の変数にtapAreaコンポーネントを入れる
-		if(bomFlag == false){
-			if(t.bomTap){
-//				Debug.Log("bom shoot !!");
-				//弾を生成する位置を指定する
-				Vector2 vecBulletPos = bulletStartPosition.position;
-				Instantiate(bomObject, vecBulletPos, transform.rotation);	//プレハフ生成
-				//↓これは画面外でボムか消えたらBOM側でfalseにする
-				bomFlag = true;
-				//残りボム数を見て発射できるかどうか分岐する
+		//gcって仮の変数にGameControllerのコンポーネントを入れる
+		GameController gc = gameController.GetComponent<GameController>();
+		//BOM発射処理
+		//残りボム数を見て発射できるかどうか分岐する
+		if(gc.totalBom > 0){
+			if(bomFlag == false){
+				if(t.bomTap){
+	//				Debug.Log("bom shoot !!");
+					//BOMを生成する位置を指定する
+					Vector2 vecBulletPos = bulletStartPosition.position;
+					Instantiate(bomObject, vecBulletPos, transform.rotation);	//プレハフ生成
+					bomFlag = true;		//画面外でボムか消えたらBOM側でfalseにする
+					gc.totalBom -= 1;	//BOM使用で残弾を減らす
+				}
 			}
-		}	
+		}
 		//タップ離すと初期化する
 		if(t.gamenTap == false){
 			shotFlag = false;
@@ -72,7 +78,6 @@ public class Player : MonoBehaviour {
 			temp.x *= -1;							//左右反転させる
 			gameObject.transform.localScale = temp;	//元に戻す
 		}
-
 		//フェンスとの接触時
 		if(col.gameObject.tag == "MissLine"){
 			Destroy(gameObject);
