@@ -7,12 +7,12 @@ public class MissLineFall : MonoBehaviour {
 
 	private float nextTime;
 	public float interval = 1.0f;	//点滅周期
-	public Renderer rend;			//
-	GameObject gameController;						//検索したオブジェクト入れる用
+	public Renderer rend;			//点滅させたいオブジェクトを入れる用
+	GameObject gameController;		//検索したオブジェクト入れる用
 
 	void Start () {
-		nextTime = Time.time;				//現時刻を代入
-		rend = GetComponent<Renderer>();	//点滅させたいオブジェクトを入れる用
+		nextTime = Time.time;										//現時刻を代入
+		rend = GetComponent<Renderer>();							//点滅させたいオブジェクトを入れる用
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 	}
 
@@ -22,16 +22,16 @@ public class MissLineFall : MonoBehaviour {
 
 		//フェンスに接触した敵の数によって、フェンス点滅
 		if(!gc.gameOver){
-		if(enemyTamaruNum == 2){
-			//呼び出されたら
-			if(Time.time > nextTime){
-				rend.enabled = !rend.enabled;	//表示反転
-				nextTime += interval;			//次に点滅する時間をセット
-			}else{
-				rend.enabled = true;
+			if(enemyTamaruNum == 2){
+				//呼び出されたら
+				if(Time.time > nextTime){
+					rend.enabled = !rend.enabled;	//表示反転
+					nextTime += interval;			//次に点滅する時間をセット
+				}else{
+					rend.enabled = true;
+				}
+				Debug.Log("blink");
 			}
-			Debug.Log("blink");
-		}
 		}
 
 		//フェンスに接触した敵の数によって、フェンス落下
