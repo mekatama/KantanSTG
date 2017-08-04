@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-	GameObject enemy;				//検索したオブジェクト入れる用
+//	GameObject enemy;				//検索したオブジェクト入れる用
 	public int enemyHp;				//敵のHP
 	public int enemyScore;			//敵のスコア
 	public int moveSpeed = 2;		//enemyの左右移動速度
@@ -10,7 +10,7 @@ public class Enemy : MonoBehaviour {
 	public GameObject item = null;	//Enemyから出現させるアイテム
 
 	void Start(){
-		enemy = GameObject.FindWithTag ("Enemy");					//Enemyタグのオブジェクトを探す
+//		enemy = GameObject.FindWithTag ("Enemy");					//Enemyタグのオブジェクトを探す
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
 	}
 
