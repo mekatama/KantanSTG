@@ -2,7 +2,6 @@
 using System.Collections;
 
 public class EnemySpawn : MonoBehaviour {
-//	public GameObject enemyObject = null;	//敵のプレハブ
 	public GameObject[] enemyObject;	//敵のプレハブを配列で管理
 	public GameObject enemyHolder;		//敵のプレハブをヒエラルキー画面でまとめるため
 
