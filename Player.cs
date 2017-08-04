@@ -13,11 +13,16 @@ public class Player : MonoBehaviour {
 	public int rapidNum = 0;						//player連射数カウント用
 	private bool shotFlag = false;					//ショット一回だけ発射処理用フラグ
 	public bool bomFlag = false;					//BOM一回だけ発射処理用フラグ
+	AudioSource audioSource;						//AudioSourceコンポーネント取得用
+	public AudioClip audioClipShot;					//ShotSE
+	public AudioClip audioClipBom;					//BomSE
+	public AudioClip audioClipItem;					//ItemSE
 
 	void Start () {
 		playey = GameObject.FindWithTag ("Player");					//Playerタグのオブジェクトを探す
 		tapArea = GameObject.FindWithTag ("TapArea");				//TapAreaタグのオブジェクトを探す
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
+		audioSource = gameObject.GetComponent<AudioSource>();		//AudioSourceコンポーネント取得
 	}
 	
 	void Update () {
@@ -40,6 +45,8 @@ public class Player : MonoBehaviour {
 					t.gamenTap = false;
 //					Debug.Log(t.gamenTap);
 					rapidNum += 1;
+					audioSource.clip = audioClipShot;				//SE決定
+					audioSource.Play ();							//SE再生
 				}
 			}
 		}
@@ -57,6 +64,8 @@ public class Player : MonoBehaviour {
 					Instantiate(bomObject, vecBulletPos, transform.rotation);	//プレハフ生成
 					bomFlag = true;		//画面外でボムか消えたらBOM側でfalseにする
 					gc.totalBom -= 1;	//BOM使用で残弾を減らす
+					audioSource.clip = audioClipBom;				//SE決定
+					audioSource.Play ();							//SE再生
 				}
 			}
 		}
@@ -84,6 +93,13 @@ public class Player : MonoBehaviour {
 		if(col.gameObject.tag == "MissLine"){
 			gc.gameOver = true;		//GameOverフラグをon
 			Destroy(gameObject);
+		}
+	}
+	//他のオブジェクトとの当たり判定
+	void OnTriggerEnter2D(Collider2D other) {
+		if(other.tag == "Item"){
+			audioSource.clip = audioClipItem;				//SE決定
+			audioSource.Play ();							//SE再生
 		}
 	}
 }
