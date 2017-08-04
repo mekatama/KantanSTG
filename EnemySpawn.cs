@@ -4,9 +4,9 @@ using System.Collections;
 public class EnemySpawn : MonoBehaviour {
 	public GameObject[] enemyObject;	//敵のプレハブを配列で管理
 	public GameObject enemyHolder;		//敵のプレハブをヒエラルキー画面でまとめるため
-
-	public float timeOut;					//敵を出現させたい時間間隔
-	private float timeElapsed;				//時間を仮に格納する変数
+	public float timeOut;				//敵を出現させたい時間間隔
+	private float timeElapsed;			//時間を仮に格納する変数
+	public int moveSpeed = 1;			//enemyの左右移動速度
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,10 +25,15 @@ public class EnemySpawn : MonoBehaviour {
 			new Vector2(x_pos, transform.position.y),
 			transform.rotation
 		);
-
 		//親オブジェクトの設定
 		enemy.transform.parent = enemyHolder.transform;
-	
+
+		//生成時にaddforce
+		//EnemyのRigidbodyを取得して、左右移動する
+		Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();	//コンポーネント取得
+		//左右移動、仮の数値
+		enemyRigidbody.AddForce(new Vector2(10, 0));
+
 		timeElapsed = 0.0f;			//リセット
 	}
 }
