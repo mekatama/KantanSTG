@@ -5,7 +5,7 @@ public class Enemy : MonoBehaviour {
 //	GameObject enemy;				//検索したオブジェクト入れる用
 	public int enemyHp;				//敵のHP
 	public int enemyScore;			//敵のスコア
-	public int moveSpeed = 2;		//enemyの左右移動速度
+//	public int moveSpeed = 2;		//enemyの左右移動速度
 	GameObject gameController;		//検索したオブジェクト入れる用
 	public GameObject item = null;	//Enemyから出現させるアイテム
 
