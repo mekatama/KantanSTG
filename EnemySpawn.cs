@@ -10,11 +10,15 @@ public class EnemySpawn : MonoBehaviour {
 	void Update () {
 		timeElapsed += Time.deltaTime;	//経過時間の保存
         if(timeElapsed >= timeOut) {	//指定した経過時間に達したら
-			//ランダムで出現位置を決める
-			float x_pos = Random.Range(-2.0f,2.0f); 
-			//敵を生成する
-			Instantiate(enemyObject,new Vector2(x_pos, transform.position.y),transform.rotation);	//プレハフ生成
-			timeElapsed = 0.0f;			//リセット
+			EnemyGo();
 		}
+	}
+
+	public void EnemyGo(){
+		//ランダムで出現位置を決める
+		float x_pos = Random.Range(-2.0f,2.0f); 
+		//敵を生成する
+		Instantiate(enemyObject,new Vector2(x_pos, transform.position.y),transform.rotation);	//プレハフ生成
+		timeElapsed = 0.0f;			//リセット
 	}
 }
