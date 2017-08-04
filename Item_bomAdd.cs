@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class Item_bomAdd : MonoBehaviour {
-	public int itemBomAdd = 1;			//ボム数
-	public GameObject gameController;	//ボム数表示を管理しているオブジェクト
+	public int itemBomAdd = 1;	//ボム数
+	GameObject gameController;	//ボム数表示を管理しているオブジェクト
 
 	void Start(){
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
