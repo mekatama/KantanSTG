@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class MissLineFall : MonoBehaviour {
-	private int enemyTamaruNum;	//敵がたまった数
+	private int enemyTamaruNum;		//敵がたまった数
 
 	private float nextTime;
 	public float interval = 1.0f;	//点滅周期
