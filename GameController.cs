@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour {
 	public int totalScore = 0;	//ここで合計スコアを管理していく
 	public int totalBom = 0;	//ここでボス数を管理していく
+	public int totalLevel = 0;	//ここで難易度を管理していく
 	public bool bomTap = false;	//playerて使用するplayer自身をタップしたかどうかのフラグ
 
 	public Canvas gameoverCamvas;
