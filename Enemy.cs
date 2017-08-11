@@ -32,7 +32,8 @@ public class Enemy : MonoBehaviour {
 //				audioSource.Play ();							//SE再生
 				//gcって仮の変数にGameControllerのコンポーネントを入れる
 				GameController gc = gameController.GetComponent<GameController>();
-				gc.totalScore = gc.totalScore + enemyScore;
+				gc.totalScore = gc.totalScore + enemyScore;	//スコア加算
+				gc.totalKills += 1;							//撃破数加算
 				//このGameObjectを［Hierrchy］ビューから削除する
 				Destroy(gameObject);
 				//四分の一の確率でボムアイテムを落とす
@@ -48,7 +49,8 @@ public class Enemy : MonoBehaviour {
 			GameController gc = gameController.GetComponent<GameController>();
 			//スコア加算
 			//【ネタ】ボムの時はスコアがアップする?でも、アイテムは出ない
-			gc.totalScore = gc.totalScore + enemyScore;
+			gc.totalScore = gc.totalScore + (enemyScore * 2);	//スコア加算(*2)
+			gc.totalKills += 1;									//撃破数加算
 			//このGameObjectを［Hierrchy］ビューから削除する
 			Destroy(gameObject);
 		}
