@@ -2,13 +2,14 @@
 using System.Collections;
 
 public class Enemy : MonoBehaviour {
-	public int enemyHp;				//敵のHP
-	public int enemyScore;			//敵のスコア
-	GameObject gameController;		//検索したオブジェクト入れる用
-	public GameObject item = null;	//Enemyから出現させるアイテム
+	public int enemyHp;					//敵のHP
+	public int enemyScore;				//敵のスコア
+	GameObject gameController;			//検索したオブジェクト入れる用
+	public GameObject item = null;		//Enemyから出現させるアイテム
 	AudioSource audioSource;			//AudioSourceコンポーネント取得用
 	public AudioClip audioClipHit;		//HitSE
 	public AudioClip audioClipDestroy;	//DestroySE
+	public int bomScoreRate;			//ボムのスコア倍率
 
 	void Start(){
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
@@ -48,9 +49,8 @@ public class Enemy : MonoBehaviour {
 			//gcって仮の変数にGameControllerのコンポーネントを入れる
 			GameController gc = gameController.GetComponent<GameController>();
 			//スコア加算
-			//【ネタ】ボムの時はスコアがアップする?でも、アイテムは出ない
-			gc.totalScore = gc.totalScore + (enemyScore * 2);	//スコア加算(*2)
-			gc.totalKills += 1;									//撃破数加算
+			gc.totalScore = gc.totalScore + (enemyScore * bomScoreRate);//スコア加算
+			gc.totalKills += 1;											//撃破数加算
 			//このGameObjectを［Hierrchy］ビューから削除する
 			Destroy(gameObject);
 		}
