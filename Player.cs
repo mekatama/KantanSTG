@@ -62,8 +62,9 @@ public class Player : MonoBehaviour {
 					//BOMを生成する位置を指定する
 					Vector2 vecBulletPos = bulletStartPosition.position;
 					Instantiate(bomObject, vecBulletPos, transform.rotation);	//プレハフ生成
-					bomFlag = true;		//画面外でボムか消えたらBOM側でfalseにする
-					gc.totalBom -= 1;	//BOM使用で残弾を減らす
+					bomFlag = true;			//画面外でボムか消えたらBOM側でfalseにする
+					gc.totalBom -= 1;		//BOM使用で残弾を減らす
+					gc.totalBomAttack += 1;	//BOM使用数を加算
 					audioSource.clip = audioClipBom;				//SE決定
 					audioSource.Play ();							//SE再生
 				}
