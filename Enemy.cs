@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour {
 	public int enemyScore;				//敵のスコア
 	GameObject gameController;			//検索したオブジェクト入れる用
 	public GameObject item = null;		//Enemyから出現させるアイテム
+	public int itemGoParam;				//アイテム出現確率(0=アイテム出ない、1=必ずアイテム出る)
+	public int itemGoParamBom;			//ボム攻撃時アイテム出現確率(0=アイテム出ない、1=必ずアイテム出る)
 	AudioSource audioSource;			//AudioSourceコンポーネント取得用
 	public AudioClip audioClipHit;		//HitSE
 	public AudioClip audioClipDestroy;	//DestroySE
@@ -37,8 +39,8 @@ public class Enemy : MonoBehaviour {
 				gc.totalKills += 1;							//撃破数加算
 				//このGameObjectを［Hierrchy］ビューから削除する
 				Destroy(gameObject);
-				//四分の一の確率でボムアイテムを落とす
-				if (Random.Range (0, 2) == 0) {
+				//itemGoParam分の一の確率でボムアイテムを落とす
+				if (Random.Range (0, itemGoParam) == itemGoParam - 1) {
 					Instantiate (item, transform.position, transform.rotation);
 				}
 			}
@@ -53,6 +55,10 @@ public class Enemy : MonoBehaviour {
 			gc.totalKills += 1;											//撃破数加算
 			//このGameObjectを［Hierrchy］ビューから削除する
 			Destroy(gameObject);
+			//itemGoParam分の一の確率でボムアイテムを落とす
+			if (Random.Range (0, itemGoParamBom) == itemGoParamBom - 1) {
+				Instantiate (item, transform.position, transform.rotation);
+			}
 		}
 	}
 }
