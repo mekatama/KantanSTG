@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MissLineFall : MonoBehaviour {
 	private int enemyTamaruNum;		//敵がたまった数
-
 	private float nextTime;
 	public float interval = 1.0f;	//点滅周期
 	public Renderer rend;			//点滅させたいオブジェクトを入れる用
@@ -19,7 +18,6 @@ public class MissLineFall : MonoBehaviour {
 	void Update(){
 		//gcって仮の変数にGameControllerのコンポーネントを入れる
 		GameController gc = gameController.GetComponent<GameController>();
-
 		//フェンスに接触した敵の数によって、フェンス点滅
 		if(!gc.gameOver){
 			if(enemyTamaruNum == 2){
@@ -28,7 +26,7 @@ public class MissLineFall : MonoBehaviour {
 					rend.enabled = !rend.enabled;	//表示反転
 					nextTime += interval;			//次に点滅する時間をセット
 				}else{
-					rend.enabled = true;
+					rend.enabled = true;			//強制的に表示on
 				}
 				Debug.Log("blink");
 			}
@@ -36,6 +34,7 @@ public class MissLineFall : MonoBehaviour {
 
 		//フェンスに接触した敵の数によって、フェンス落下
 		if(enemyTamaruNum == 3){
+			rend.enabled = true;		//表示on
 			//FreezePositionを無効化する
 			gameObject.GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.None;
 		}
@@ -53,6 +52,7 @@ public class MissLineFall : MonoBehaviour {
 	void OnTriggerExit2D(Collider2D other) {
 		if(other.tag == "Enemy"){
 			enemyTamaruNum -= 1;
+			rend.enabled = true;		//表示on
 //			Debug.Log("tamaru = " + enemyTamaruNum);
 		}
 	}
