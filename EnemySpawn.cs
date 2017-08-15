@@ -32,10 +32,13 @@ public class EnemySpawn : MonoBehaviour {
 		if(gc.totalLevel < 3){
 			eType = 0;
 		}else if(gc.totalLevel >= 3 && gc.totalLevel < 6){
+			timeOut = 2.5f;				//出現させたい時間間隔を再設定
 			eType = Random.Range(0,2);
 		}else if(gc.totalLevel >= 6 && gc.totalLevel < 9){
+			timeOut = 2.0f;				//出現させたい時間間隔を再設定
 			eType = Random.Range(0,3);
 		}else if(gc.totalLevel >= 9){
+			timeOut = 1.5f;				//出現させたい時間間隔を再設定
 			eType = Random.Range(0,4);
 		}
 
