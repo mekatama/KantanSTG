@@ -2,8 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Title_Controller : MonoBehaviour {
+	public Text highScoreLabel;	//ハイスコア用のtext
+
+	public void Start () {
+		//ハイスコアの表示
+		highScoreLabel.text = "HighScore:" + PlayerPrefs.GetInt("HighScore");
+	}
 
 	void Update(){
 		//backキー
