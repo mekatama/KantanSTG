@@ -23,6 +23,13 @@ public class GameController : MonoBehaviour {
 		if(gameOver){
 			Debug.Log("gameover");
 			gameoverCamvas.enabled = true;	//GameOverUI表示
+
+			//ハイスコアの保存
+			if(PlayerPrefs.GetInt("HighScore") < totalScore){
+				//ハイスコア保存
+				PlayerPrefs.SetInt("HighScore", totalScore);
+				Debug.Log("HighScore:" + PlayerPrefs.GetInt("HighScore"));
+			}
 		}
 		//難易度計算
 		totalLevel = (totalKills / adjust_Kills) + (totalBomAttack / adjust_BomAttack); 
