@@ -16,6 +16,6 @@ public class UI_Bom : MonoBehaviour {
 	void Update () {
 		//gcって仮の変数にGameControllerのコンポーネントを入れる
 		GameController gc = gameController.GetComponent<GameController>();
-		bomLabel.text = gc.totalBom.ToString("000000");			
+		bomLabel.text = "Bom   : " + gc.totalBom.ToString("000000");			
 	}
 }
