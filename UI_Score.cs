@@ -13,6 +13,6 @@ public class UI_Score : MonoBehaviour {
 	void Update () {
 		//gcって仮の変数にGameControllerのコンポーネントを入れる
 		GameController gc = gameController.GetComponent<GameController>();
-		scoreLabel.text = gc.totalScore.ToString("000000");	
+		scoreLabel.text = "Score : " + gc.totalScore.ToString("000000");	
 	}
 }
