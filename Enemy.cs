@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour {
 	public AudioClip audioClipHit;		//HitSE
 	public AudioClip audioClipDestroy;	//DestroySE
 	public int bomScoreRate;			//ボムのスコア倍率
+	public GameObject explosion;		//爆発プレハブを入れる用
 
 	void Start(){
 		gameController = GameObject.FindWithTag ("GameController");	//GameControllerオブジェクトを探す
@@ -39,6 +40,8 @@ public class Enemy : MonoBehaviour {
 				gc.totalKills += 1;							//撃破数加算
 				//このGameObjectを［Hierrchy］ビューから削除する
 				Destroy(gameObject);
+				//爆発する
+				Instantiate (explosion, transform.position, transform.rotation);
 				//itemGoParam分の一の確率でボムアイテムを落とす
 				if (Random.Range (0, itemGoParam) == itemGoParam - 1) {
 					Instantiate (item, transform.position, transform.rotation);
