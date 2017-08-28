@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameController : MonoBehaviour {
@@ -42,8 +43,15 @@ public class GameController : MonoBehaviour {
 				audioSource.Play ();					//SE再生
 				gameOverSE = true;
 			}
+			//タイトルに戻る
+			Invoke("ReturnTitle", 2.0f);	//シーンのロード
 		}
 		//難易度計算
 		totalLevel = (totalKills / adjust_Kills) + (totalBomAttack / adjust_BomAttack); 
+	}
+
+	//タイトルに戻るボタン用の制御関数
+	public void ReturnTitle(){
+		SceneManager.LoadScene("Title");	//シーンのロード
 	}
 }
