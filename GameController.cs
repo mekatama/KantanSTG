@@ -29,7 +29,7 @@ public class GameController : MonoBehaviour {
 	void Update () {
 		//GameOverUIの表示判定
 		if(gameOver){
-			Debug.Log("gameover");
+//			Debug.Log("gameover");
 			gameoverCamvas.enabled = true;			//GameOverUI表示
 			//ハイスコアの保存
 			if(PlayerPrefs.GetInt("HighScore") < totalScore){

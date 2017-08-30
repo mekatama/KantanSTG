@@ -25,15 +25,11 @@ public class Enemy : MonoBehaviour {
 		if(other.tag == "Bullet"){
 			audioSource.clip = audioClipHit;				//SE決定
 			audioSource.Play ();							//SE再生
-//			Debug.Log("hit!!");
 			if(enemyHp > 0){
 				enemyHp -= 1;
-//				Debug.Log("EneyHP=" + enemyHp);
 			}
 			if(enemyHp <= 0){
-//				audioSource.clip = audioClipDestroy;			//SE決定
 				AudioSource.PlayClipAtPoint( audioClipDestroy, transform.position);	//SE再生(Destroy対策用)
-//				audioSource.Play ();							//SE再生
 				//gcって仮の変数にGameControllerのコンポーネントを入れる
 				GameController gc = gameController.GetComponent<GameController>();
 				gc.totalScore = gc.totalScore + enemyScore;	//スコア加算
