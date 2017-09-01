@@ -54,6 +54,8 @@ public class Enemy : MonoBehaviour {
 			gc.totalKills += 1;											//撃破数加算
 			//このGameObjectを［Hierrchy］ビューから削除する
 			Destroy(gameObject);
+			//爆発する
+			Instantiate (explosion, transform.position, transform.rotation);
 			//itemGoParam分の一の確率でボムアイテムを落とす
 			if (Random.Range (0, itemGoParamBom) == itemGoParamBom - 1) {
 				Instantiate (item, transform.position, transform.rotation);
