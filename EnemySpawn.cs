@@ -54,13 +54,15 @@ public class EnemySpawn : MonoBehaviour {
 		//生成時にaddforce
 		//EnemyのRigidbodyを取得して、左右移動する
 		Rigidbody2D enemyRigidbody = enemy.GetComponent<Rigidbody2D>();	//コンポーネント取得
-		//左右移動、難易度でアップ(左右はランダム)
+		//【廃止】左右移動、難易度でアップ(左右はランダム)
 		//難易度で落下速度アップ
 		int LRran = Random.Range(0,2);
 		if(LRran == 0){
-			enemyRigidbody.AddForce(new Vector2(gc.totalLevel, gc.totalLevel));
+//			enemyRigidbody.AddForce(new Vector2(gc.totalLevel, gc.totalLevel));
+			enemyRigidbody.AddForce(new Vector2(0.0f, gc.totalLevel));
 		}else{
-			enemyRigidbody.AddForce(new Vector2(gc.totalLevel * -1, gc.totalLevel));
+//			enemyRigidbody.AddForce(new Vector2(gc.totalLevel * -1, gc.totalLevel));
+			enemyRigidbody.AddForce(new Vector2(0.0f, gc.totalLevel));
 		}
 	
 		timeElapsed = 0.0f;			//リセット
